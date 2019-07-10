@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spx.dao.NcDao">
+
+
+    <select id="findTotalLike" parameterType="com.spx.entity.Nc" resultType="java.lang.Integer">
+        select count(*) from nc where 1=1
+        <if test="nc != null">
+            <if test="nc.name != null and nc.name!=''">
+                and name like CONCAT('%', #{nc.name} ,'%')
+            </if>
+        </if>
+        <if test="nc != null">
+            <if test="nc.rl != null and nc.rl!=''">
+                and rl like CONCAT('%', #{nc.rl} ,'%')
+            </if>
+        </if>
+        <if test="nc != null">
+            <if test="nc.rlms != null and nc.rlms!=''">
+                and rlms like CONCAT('%', #{nc.rlms} ,'%')
+            </if>
+        </if>
+        <if test="nc != null">
+            <if test="nc.lx != null and nc.lx!=''">
+                and lx like CONCAT('%', #{nc.lx} ,'%')
+            </if>
+        </if>
+        <if test="nc != null">
+            <if test="nc.zp != null and nc.zp!=''">
+                and zp like CONCAT('%', #{nc.zp} ,'%')
+            </if>
+        </if>
+        <if test="nc != null">
+            <if test="nc.gzdy != null and nc.gzdy!=''">
+                and gzdy like CONCAT('%', #{nc.gzdy} ,'%')
+            </if>
+        </if>
+        ;
+    </select>
+    <select id="allnc" resultType="com.spx.entity.Nc">
+        select * from nc where 1=1
+        <if test="nc != null">
+            <if test="nc.name != null and nc.name!=''">
+                and name like CONCAT('%', #{nc.name} ,'%')
+            </if>
+        </if>
+        <if test="nc != null">
+            <if test="nc.rl != null and nc.rl!=''">
+                and rl like CONCAT('%', #{nc.rl} ,'%')
+            </if>
+        </if>
+        <if test="nc != null">
+            <if test="nc.rlms != null and nc.rlms!=''">
+                and rlms like CONCAT('%', #{nc.rlms} ,'%')
+            </if>
+        </if>
+        <if test="nc != null">
+            <if test="nc.lx != null and nc.lx!=''">
+                and lx like CONCAT('%', #{nc.lx} ,'%')
+            </if>
+        </if>
+        <if test="nc != null">
+            <if test="nc.zp != null and nc.zp!=''">
+                and zp like CONCAT('%', #{nc.zp} ,'%')
+            </if>
+        </if>
+        <if test="nc != null">
+            <if test="nc.gzdy != null and nc.gzdy!=''">
+                and gzdy like CONCAT('%', #{nc.gzdy} ,'%')
+            </if>
+        </if>
+        limit #{1},5;
+    </select>
+    
+    
+    
+    <select id="selectList" resultType="com.spx.entity.Nc">
+        select * from nc limit #{page},#{rows};
+    </select>
+
+    <select id="findTotal" resultType="java.lang.Long">
+        select count(*) from nc;
+    </select>
+
+    <insert id="insert" parameterType="com.spx.entity.Nc">
+    insert into nc
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+       id,
+        <if test="name != null">
+            name,
+        </if>
+        <if test="price != null">
+            price,
+        </if>
+        <if test="rl != null">
+            rl,
+        </if>
+        <if test="rlms != null">
+            rlms,
+        </if>
+        <if test="lx != null">
+            lx,
+        </if>
+        <if test="zp != null">
+            zp,
+        </if>
+        <if test="gzdy != null">
+            gzdy,
+        </if>
+        <if test="fs != null">
+            fs,
+        </if>
+        <if test="ms != null">
+            ms,
+        </if>
+        <if test="more != null">
+            more,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+       null,
+        <if test="name != null">
+            #{name,jdbcType=VARCHAR},
+        </if>
+        <if test="price != null">
+            #{price,jdbcType=INTEGER},
+        </if>
+        <if test="rl != null">
+            #{rl,jdbcType=VARCHAR},
+        </if>
+        <if test="rlms != null">
+            #{rlms,jdbcType=VARCHAR},
+        </if>
+        <if test="lx != null">
+            #{lx,jdbcType=VARCHAR},
+        </if>
+        <if test="zp != null">
+            #{zp,jdbcType=VARCHAR},
+        </if>
+        <if test="gzdy != null">
+            #{gzdy,jdbcType=VARCHAR},
+        </if>
+        <if test="fs != null">
+            #{fs,jdbcType=INTEGER},
+        </if>
+        <if test="ms != null">
+            #{ms,jdbcType=VARCHAR},
+        </if>
+        <if test="more != null">
+            #{more,jdbcType=VARCHAR},
+        </if>
+    </trim>
+    </insert>
+    <select id="selectById" parameterType="java.lang.Integer" resultType="com.spx.entity.Nc">
+        select * from nc where id = #{id}
+    </select>
+    <update id="update" parameterType="com.spx.entity.Nc">
+        update nc
+        <set>
+                name = #{name,jdbcType=VARCHAR},
+                price = #{price,jdbcType=INTEGER},
+                rl = #{rl,jdbcType=VARCHAR},
+                rlms = #{rlms,jdbcType=VARCHAR},
+                lx = #{lx,jdbcType=VARCHAR},
+                zp = #{zp,jdbcType=VARCHAR},
+                gzdy = #{gzdy,jdbcType=VARCHAR},
+                fs = #{fs,jdbcType=INTEGER},
+                ms = #{ms,jdbcType=VARCHAR},
+                more = #{more,jdbcType=VARCHAR}
+        </set>
+        where id = #{id};
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from nc where id = #{id};
+    </delete>
+</mapper>

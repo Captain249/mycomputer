@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spx.dao.YpDao">
+
+
+    <select id="findTotalLike" parameterType="com.spx.entity.Yp" resultType="java.lang.Integer">
+        select count(*) from yp where 1=1
+        <if test="yp != null">
+            <if test="yp.name != null and yp.name!=''">
+                and name like CONCAT('%', #{yp.name} ,'%')
+            </if>
+        </if>
+        <if test="yp != null">
+            <if test="yp.rl != null and yp.rl!=''">
+                and rl like CONCAT('%', #{yp.rl} ,'%')
+            </if>
+        </if>
+        <if test="yp != null">
+            <if test="yp.jklx != null and yp.jklx!=''">
+                and jklx like CONCAT('%', #{yp.jklx} ,'%')
+            </if>
+        </if>
+        <if test="yp != null">
+            <if test="yp.zs != null and yp.zs!=''">
+                and zs like CONCAT('%', #{yp.zs} ,'%')
+            </if>
+        </if>
+        <if test="yp != null">
+            <if test="yp.hc != null and yp.hc!=''">
+                and hc like CONCAT('%', #{yp.hc} ,'%')
+            </if>
+        </if>
+        <if test="yp != null">
+            <if test="yp.cc != null and yp.cc!=''">
+                and cc like CONCAT('%', #{yp.cc} ,'%')
+            </if>
+        </if>
+        ;
+    </select>
+    <select id="allyp" resultType="com.spx.entity.Yp">
+        select * from yp where 1=1
+        <if test="yp != null">
+            <if test="yp.name != null and yp.name!=''">
+                and name like CONCAT('%', #{yp.name} ,'%')
+            </if>
+        </if>
+        <if test="yp != null">
+            <if test="yp.rl != null and yp.rl!=''">
+                and rl like CONCAT('%', #{yp.rl} ,'%')
+            </if>
+        </if>
+        <if test="yp != null">
+            <if test="yp.jklx != null and yp.jklx!=''">
+                and jklx like CONCAT('%', #{yp.jklx} ,'%')
+            </if>
+        </if>
+        <if test="yp != null">
+            <if test="yp.zs != null and yp.zs!=''">
+                and zs like CONCAT('%', #{yp.zs} ,'%')
+            </if>
+        </if>
+        <if test="yp != null">
+            <if test="yp.hc != null and yp.hc!=''">
+                and hc like CONCAT('%', #{yp.hc} ,'%')
+            </if>
+        </if>
+        <if test="yp != null">
+            <if test="yp.cc != null and yp.cc!=''">
+                and cc like CONCAT('%', #{yp.cc} ,'%')
+            </if>
+        </if>
+        limit #{1},5;
+    </select>
+    
+    
+    
+    <select id="selectList" resultType="com.spx.entity.Yp">
+        select * from yp limit #{page},#{rows};
+    </select>
+
+    <select id="findTotal" resultType="java.lang.Long">
+        select count(*) from yp;
+    </select>
+
+    <insert id="insert" parameterType="com.spx.entity.Yp">
+    insert into yp
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+       id,
+        <if test="name != null">
+            name,
+        </if>
+        <if test="price != null">
+            price,
+        </if>
+        <if test="rl != null">
+            rl,
+        </if>
+        <if test="jklx != null">
+            jklx,
+        </if>
+        <if test="zs != null">
+            zs,
+        </if>
+        <if test="hc != null">
+            hc,
+        </if>
+        <if test="cc != null">
+            cc,
+        </if>
+        <if test="fs != null">
+            fs,
+        </if>
+        <if test="ms != null">
+            ms,
+        </if>
+        <if test="more != null">
+            more,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+       null,
+        <if test="name != null">
+            #{name,jdbcType=VARCHAR},
+        </if>
+        <if test="price != null">
+            #{price,jdbcType=INTEGER},
+        </if>
+        <if test="rl != null">
+            #{rl,jdbcType=VARCHAR},
+        </if>
+        <if test="jklx != null">
+            #{jklx,jdbcType=VARCHAR},
+        </if>
+        <if test="zs != null">
+            #{zs,jdbcType=VARCHAR},
+        </if>
+        <if test="hc != null">
+            #{hc,jdbcType=VARCHAR},
+        </if>
+        <if test="cc != null">
+            #{cc,jdbcType=VARCHAR},
+        </if>
+        <if test="fs != null">
+            #{fs,jdbcType=INTEGER},
+        </if>
+        <if test="ms != null">
+            #{ms,jdbcType=VARCHAR},
+        </if>
+        <if test="more != null">
+            #{more,jdbcType=VARCHAR},
+        </if>
+    </trim>
+    </insert>
+    <select id="selectById" parameterType="java.lang.Integer" resultType="com.spx.entity.Yp">
+        select * from yp where id = #{id}
+    </select>
+    <update id="update" parameterType="com.spx.entity.Yp">
+        update yp
+        <set>
+                name = #{name,jdbcType=VARCHAR},
+                price = #{price,jdbcType=INTEGER},
+                rl = #{rl,jdbcType=VARCHAR},
+                jklx = #{jklx,jdbcType=VARCHAR},
+                zs = #{zs,jdbcType=VARCHAR},
+                hc = #{hc,jdbcType=VARCHAR},
+                cc = #{cc,jdbcType=VARCHAR},
+                fs = #{fs,jdbcType=INTEGER},
+                ms = #{ms,jdbcType=VARCHAR},
+                more = #{more,jdbcType=VARCHAR}
+        </set>
+        where id = #{id};
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from yp where id = #{id};
+    </delete>
+</mapper>

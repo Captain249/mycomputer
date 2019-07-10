@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spx.dao.XsqDao">
+
+    <select id="findTotalLike" parameterType="com.spx.entity.Xsq" resultType="java.lang.Integer">
+        select count(*) from xsq where 1=1
+        <if test="xsq != null">
+            <if test="xsq.name != null and xsq.name!=''">
+                and name like CONCAT('%', #{xsq.name} ,'%')
+            </if>
+        </if>
+        <if test="xsq != null">
+            <if test="xsq.pmcc != null and xsq.pmcc!=''">
+                and pmcc like CONCAT('%', #{xsq.pmcc} ,'%')
+            </if>
+        </if>
+        <if test="xsq != null">
+            <if test="xsq.cplx != null and xsq.cplx!=''">
+                and cplx like CONCAT('%', #{xsq.cplx} ,'%')
+            </if>
+        </if>
+        <if test="xsq != null">
+            <if test="xsq.spjk != null and xsq.spjk!=''">
+                and spjk like CONCAT('%', #{xsq.spjk} ,'%')
+            </if>
+        </if>
+        <if test="xsq != null">
+            <if test="xsq.mblx != null and xsq.mblx!=''">
+                and mblx like CONCAT('%', #{xsq.mblx} ,'%')
+            </if>
+        </if>
+        <if test="xsq != null">
+            <if test="xsq.zjfbl != null and xsq.zjfbl!=''">
+                and zjfbl like CONCAT('%', #{xsq.zjfbl} ,'%')
+            </if>
+        </if>
+        ;
+    </select>
+    <select id="allxsq" resultType="com.spx.entity.Xsq">
+        select * from xsq where 1=1
+        <if test="xsq != null">
+            <if test="xsq.name != null and xsq.name!=''">
+                and name like CONCAT('%', #{xsq.name} ,'%')
+            </if>
+        </if>
+        <if test="xsq != null">
+            <if test="xsq.pmcc != null and xsq.pmcc!=''">
+                and pmcc like CONCAT('%', #{xsq.pmcc} ,'%')
+            </if>
+        </if>
+        <if test="xsq != null">
+            <if test="xsq.cplx != null and xsq.cplx!=''">
+                and cplx like CONCAT('%', #{xsq.cplx} ,'%')
+            </if>
+        </if>
+        <if test="xsq != null">
+            <if test="xsq.spjk != null and xsq.spjk!=''">
+                and spjk like CONCAT('%', #{xsq.spjk} ,'%')
+            </if>
+        </if>
+        <if test="xsq != null">
+            <if test="xsq.mblx != null and xsq.mblx!=''">
+                and mblx like CONCAT('%', #{xsq.mblx} ,'%')
+            </if>
+        </if>
+        <if test="xsq != null">
+            <if test="xsq.zjfbl != null and xsq.zjfbl!=''">
+                and zjfbl like CONCAT('%', #{xsq.zjfbl} ,'%')
+            </if>
+        </if>
+        limit #{1},5;
+    </select>
+    
+    
+    
+    <select id="selectList" resultType="com.spx.entity.Xsq">
+        select * from xsq limit #{page},#{rows};
+    </select>
+
+    <select id="findTotal" resultType="java.lang.Long">
+        select count(*) from xsq;
+    </select>
+
+    <insert id="insert" parameterType="com.spx.entity.Xsq">
+    insert into xsq
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+       id,
+        <if test="name != null">
+            name,
+        </if>
+        <if test="price != null">
+            price,
+        </if>
+        <if test="pmcc != null">
+            pmcc,
+        </if>
+        <if test="cplx != null">
+            cplx,
+        </if>
+        <if test="spjk != null">
+            spjk,
+        </if>
+        <if test="mblx != null">
+            mblx,
+        </if>
+        <if test="zjfbl != null">
+            zjfbl,
+        </if>
+        <if test="fs != null">
+            fs,
+        </if>
+        <if test="ms != null">
+            ms,
+        </if>
+        <if test="more != null">
+            more,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+       null,
+        <if test="name != null">
+            #{name,jdbcType=VARCHAR},
+        </if>
+        <if test="price != null">
+            #{price,jdbcType=INTEGER},
+        </if>
+        <if test="pmcc != null">
+            #{pmcc,jdbcType=VARCHAR},
+        </if>
+        <if test="cplx != null">
+            #{cplx,jdbcType=VARCHAR},
+        </if>
+        <if test="spjk != null">
+            #{spjk,jdbcType=VARCHAR},
+        </if>
+        <if test="mblx != null">
+            #{mblx,jdbcType=VARCHAR},
+        </if>
+        <if test="zjfbl != null">
+            #{zjfbl,jdbcType=VARCHAR},
+        </if>
+        <if test="fs != null">
+            #{fs,jdbcType=INTEGER},
+        </if>
+        <if test="ms != null">
+            #{ms,jdbcType=VARCHAR},
+        </if>
+        <if test="more != null">
+            #{more,jdbcType=VARCHAR},
+        </if>
+    </trim>
+    </insert>
+    <select id="selectById" parameterType="java.lang.Integer" resultType="com.spx.entity.Xsq">
+        select * from xsq where id = #{id}
+    </select>
+    <update id="update" parameterType="com.spx.entity.Xsq">
+        update xsq
+        <set>
+                name = #{name,jdbcType=VARCHAR},
+                price = #{price,jdbcType=INTEGER},
+                pmcc = #{pmcc,jdbcType=VARCHAR},
+                cplx = #{cplx,jdbcType=VARCHAR},
+                spjk = #{spjk,jdbcType=VARCHAR},
+                mblx = #{mblx,jdbcType=VARCHAR},
+                zjfbl = #{zjfbl,jdbcType=VARCHAR},
+                fs = #{fs,jdbcType=INTEGER},
+                ms = #{ms,jdbcType=VARCHAR},
+                more = #{more,jdbcType=VARCHAR}
+        </set>
+        where id = #{id};
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from xsq where id = #{id};
+    </delete>
+</mapper>

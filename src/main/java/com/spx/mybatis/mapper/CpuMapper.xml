@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spx.dao.CpuDao">
+
+    <select id="findTotalLike" parameterType="com.spx.entity.Cpu" resultType="java.lang.Integer">
+        select count(*) from cpu where 1=1
+        <if test="cpu != null">
+            <if test="cpu.name != null and cpu.name!=''">
+                and name like CONCAT('%', #{cpu.name} ,'%')
+            </if>
+        </if>
+        <if test="cpu != null">
+            <if test="cpu.cc != null and cpu.cc!=''">
+                and cc like CONCAT('%', #{cpu.cc} ,'%')
+            </if>
+        </if>
+        <if test="cpu != null">
+            <if test="cpu.zp != null and cpu.zp!=''">
+                and zp like CONCAT('%', #{cpu.zp} ,'%')
+            </if>
+        </if>
+        <if test="cpu != null">
+            <if test="cpu.dtjspl != null and cpu.dtjspl!=''">
+                and dtjspl like CONCAT('%', #{cpu.dtjspl} ,'%')
+            </if>
+        </if>
+        <if test="cpu != null">
+            <if test="cpu.sjhc != null and cpu.sjhc!=''">
+                and sjhc like CONCAT('%', #{cpu.sjhc} ,'%')
+            </if>
+        </if>
+        <if test="cpu != null">
+            <if test="cpu.hxsl != null and cpu.hxsl!=''">
+                and hxsl like CONCAT('%', #{cpu.hxsl} ,'%')
+            </if>
+        </if>
+        ;
+    </select>
+    <select id="allcpu" resultType="com.spx.entity.Cpu">
+      select * from cpu where 1=1
+       <if test="cpu != null">
+           <if test="cpu.name != null and cpu.name!=''">
+              and name like CONCAT('%', #{cpu.name} ,'%')
+           </if>
+       </if>
+        <if test="cpu != null">
+            <if test="cpu.cc != null and cpu.cc!=''">
+                and cc like CONCAT('%', #{cpu.cc} ,'%')
+            </if>
+        </if>
+        <if test="cpu != null">
+            <if test="cpu.zp != null and cpu.zp!=''">
+                and zp like CONCAT('%', #{cpu.zp} ,'%')
+            </if>
+        </if>
+        <if test="cpu != null">
+            <if test="cpu.dtjspl != null and cpu.dtjspl!=''">
+                and dtjspl like CONCAT('%', #{cpu.dtjspl} ,'%')
+            </if>
+        </if>
+        <if test="cpu != null">
+            <if test="cpu.sjhc != null and cpu.sjhc!=''">
+                and sjhc like CONCAT('%', #{cpu.sjhc} ,'%')
+            </if>
+        </if>
+        <if test="cpu != null">
+            <if test="cpu.hxsl != null and cpu.hxsl!=''">
+                and hxsl like CONCAT('%', #{cpu.hxsl} ,'%')
+            </if>
+        </if>
+       limit #{1},5;
+    </select>
+
+    <select id="selectList" resultType="com.spx.entity.Cpu">
+        select * from cpu limit #{page},#{rows};
+    </select>
+
+    <select id="findTotal" resultType="java.lang.Long">
+        select count(*) from cpu;
+    </select>
+
+    <insert id="insert" parameterType="com.spx.entity.Cpu">
+    insert into CPU
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+       id,
+        <if test="name != null">
+            name,
+        </if>
+        <if test="price != null">
+            price,
+        </if>
+        <if test="cc != null">
+            cc,
+        </if>
+        <if test="zp != null">
+            zp,
+        </if>
+        <if test="dtjspl != null">
+            dtjspl,
+        </if>
+        <if test="sjhc != null">
+            sjhc,
+        </if>
+        <if test="hxsl != null">
+            hxsl,
+        </if>
+        <if test="fs != null">
+            fs,
+        </if>
+        <if test="ms != null">
+            ms,
+        </if>
+        <if test="more != null">
+            more,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+       null,
+        <if test="name != null">
+            #{name,jdbcType=VARCHAR},
+        </if>
+        <if test="price != null">
+            #{price,jdbcType=INTEGER},
+        </if>
+        <if test="cc != null">
+            #{cc,jdbcType=VARCHAR},
+        </if>
+        <if test="zp != null">
+            #{zp,jdbcType=VARCHAR},
+        </if>
+        <if test="dtjspl != null">
+            #{dtjspl,jdbcType=VARCHAR},
+        </if>
+        <if test="sjhc != null">
+            #{sjhc,jdbcType=VARCHAR},
+        </if>
+        <if test="hxsl != null">
+            #{hxsl,jdbcType=VARCHAR},
+        </if>
+        <if test="fs != null">
+            #{fs,jdbcType=INTEGER},
+        </if>
+        <if test="ms != null">
+            #{ms,jdbcType=VARCHAR},
+        </if>
+        <if test="more != null">
+            #{more,jdbcType=VARCHAR},
+        </if>
+    </trim>
+    </insert>
+    <select id="selectById" parameterType="java.lang.Integer" resultType="com.spx.entity.Cpu">
+        select * from CPU where id = #{id}
+    </select>
+    <update id="update" parameterType="com.spx.entity.Cpu">
+        update CPU
+        <set>
+                name = #{name,jdbcType=VARCHAR},
+                price = #{price,jdbcType=INTEGER},
+                cc = #{cc,jdbcType=VARCHAR},
+                zp = #{zp,jdbcType=VARCHAR},
+                dtjspl = #{dtjspl,jdbcType=VARCHAR},
+                sjhc = #{sjhc,jdbcType=VARCHAR},
+                hxsl = #{hxsl,jdbcType=VARCHAR},
+                fs = #{fs,jdbcType=INTEGER},
+                ms = #{ms,jdbcType=VARCHAR},
+                more = #{more,jdbcType=VARCHAR}
+        </set>
+        where id = #{id};
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from cpu where id = #{id};
+    </delete>
+</mapper>

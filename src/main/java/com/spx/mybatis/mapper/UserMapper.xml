@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spx.dao.UserDao">
+
+    <sql id="columnList">id,loginname,password,role</sql>
+
+    <select id="findCptById" parameterType="java.lang.Integer" resultType="com.spx.entity.Computer">
+        select * from computer where id =#{id};
+    </select>
+
+    <select id="myComputer" parameterType="java.lang.Integer" resultType="com.spx.entity.Computer">
+        select * from computer where userid=#{userid};
+    </select>
+
+    <delete id="deleteCpt">
+        delete from computer where id=#{0} and userid=#{1};
+    </delete>
+
+    <select id="loginCheck" parameterType="com.spx.entity.User" resultType="com.spx.entity.User">
+        select * from user where loginname=#{loginname} and password=#{password}
+    </select>
+
+    <insert id="savecomputer" parameterType="com.spx.entity.Computer">
+      insert into computer
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            id,
+            <if test="cpuid != null">
+                cpuid,
+            </if>
+            <if test="dyid != null">
+                dyid,
+            </if>
+            <if test="ncid != null">
+                ncid,
+            </if>
+            <if test="xkid != null">
+                xkid,
+            </if>
+            <if test="xsqid != null">
+                xsqid,
+            </if>
+            <if test="ypid != null">
+                ypid,
+            </if>
+            <if test="zbid != null">
+                zbid,
+            </if>
+            <if test="userid != null">
+                userid,
+            </if>
+            <if test="fs != null">
+                fs,
+            </if>
+            <if test="ms != null">
+                ms,
+            </if>
+            <if test="more != null">
+                more,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            null,
+            <if test="cpuid != null">
+                #{cpuid,jdbcType=INTEGER},
+            </if>
+            <if test="dyid != null">
+                #{dyid,jdbcType=INTEGER},
+            </if>
+            <if test="ncid != null">
+                #{ncid,jdbcType=INTEGER},
+            </if>
+            <if test="xkid != null">
+                #{xkid,jdbcType=INTEGER},
+            </if>
+            <if test="xsqid != null">
+                #{xsqid,jdbcType=INTEGER},
+            </if>
+            <if test="ypid != null">
+                #{ypid,jdbcType=INTEGER},
+            </if>
+            <if test="zbid != null">
+                #{zbid,jdbcType=INTEGER},
+            </if>
+            <if test="userid != null">
+                #{userid,jdbcType=INTEGER},
+            </if>
+            <if test="fs != null">
+                #{fs,jdbcType=INTEGER},
+            </if>
+            <if test="ms != null">
+                #{ms,jdbcType=VARCHAR},
+            </if>
+            <if test="more != null">
+                #{more,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+</mapper>

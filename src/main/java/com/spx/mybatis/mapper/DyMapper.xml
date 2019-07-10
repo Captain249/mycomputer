@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spx.dao.DyDao">
+
+
+    <select id="findTotalLike" parameterType="com.spx.entity.Dy" resultType="java.lang.Integer">
+        select count(*) from dy where 1=1
+        <if test="dy != null">
+            <if test="dy.name != null and dy.name!=''">
+                and name like CONCAT('%', #{dy.name} ,'%')
+            </if>
+        </if>
+        <if test="dy != null">
+            <if test="dy.edgl != null and dy.edgl!=''">
+                and edgl like CONCAT('%', #{dy.edgl} ,'%')
+            </if>
+        </if>
+        <if test="dy != null">
+            <if test="dy.pfclx != null and dy.pfclx!=''">
+                and pfclx like CONCAT('%', #{dy.pfclx} ,'%')
+            </if>
+        </if>
+        <if test="dy != null">
+            <if test="dy.dylx != null and dy.dylx!=''">
+                and dylx like CONCAT('%', #{dy.dylx} ,'%')
+            </if>
+        </if>
+        <if test="dy != null">
+            <if test="dy.fsms != null and dy.fsms!=''">
+                and fsms like CONCAT('%', #{dy.fsms} ,'%')
+            </if>
+        </if>
+        <if test="dy != null">
+            <if test="dy.qttd != null and dy.qttd!=''">
+                and qttd like CONCAT('%', #{dy.qttd} ,'%')
+            </if>
+        </if>
+        ;
+    </select>
+    <select id="alldy" resultType="com.spx.entity.Dy">
+        select * from dy where 1=1
+        <if test="dy != null">
+            <if test="dy.name != null and dy.name!=''">
+                and name like CONCAT('%', #{dy.name} ,'%')
+            </if>
+        </if>
+        <if test="dy != null">
+            <if test="dy.edgl != null and dy.edgl!=''">
+                and edgl like CONCAT('%', #{dy.edgl} ,'%')
+            </if>
+        </if>
+        <if test="dy != null">
+            <if test="dy.pfclx != null and dy.pfclx!=''">
+                and pfclx like CONCAT('%', #{dy.pfclx} ,'%')
+            </if>
+        </if>
+        <if test="dy != null">
+            <if test="dy.dylx != null and dy.dylx!=''">
+                and dylx like CONCAT('%', #{dy.dylx} ,'%')
+            </if>
+        </if>
+        <if test="dy != null">
+            <if test="dy.fsms != null and dy.fsms!=''">
+                and fsms like CONCAT('%', #{dy.fsms} ,'%')
+            </if>
+        </if>
+        <if test="dy != null">
+            <if test="dy.qttd != null and dy.qttd!=''">
+                and qttd like CONCAT('%', #{dy.qttd} ,'%')
+            </if>
+        </if>
+        limit #{1},5;
+    </select>
+
+
+
+    <select id="selectList" resultType="com.spx.entity.Dy">
+        select * from dy limit #{page},#{rows};
+    </select>
+
+    <select id="findTotal" resultType="java.lang.Long">
+        select count(*) from dy;
+    </select>
+
+    <insert id="insert" parameterType="com.spx.entity.Dy">
+    insert into dy
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+       id,
+        <if test="name != null">
+            name,
+        </if>
+        <if test="price != null">
+            price,
+        </if>
+        <if test="edgl != null">
+            edgl,
+        </if>
+        <if test="pfclx != null">
+            pfclx,
+        </if>
+        <if test="dylx != null">
+            dylx,
+        </if>
+        <if test="fsms != null">
+            fsms,
+        </if>
+        <if test="qttd != null">
+            qttd,
+        </if>
+        <if test="fs != null">
+            fs,
+        </if>
+        <if test="ms != null">
+            ms,
+        </if>
+        <if test="more != null">
+            more,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+       null,
+        <if test="name != null">
+            #{name,jdbcType=VARCHAR},
+        </if>
+        <if test="price != null">
+            #{price,jdbcType=INTEGER},
+        </if>
+        <if test="edgl != null">
+            #{edgl,jdbcType=VARCHAR},
+        </if>
+        <if test="pfclx != null">
+            #{pfclx,jdbcType=VARCHAR},
+        </if>
+        <if test="dylx != null">
+            #{dylx,jdbcType=VARCHAR},
+        </if>
+        <if test="fsms != null">
+            #{fsms,jdbcType=VARCHAR},
+        </if>
+        <if test="qttd != null">
+            #{qttd,jdbcType=VARCHAR},
+        </if>
+        <if test="fs != null">
+            #{fs,jdbcType=INTEGER},
+        </if>
+        <if test="ms != null">
+            #{ms,jdbcType=VARCHAR},
+        </if>
+        <if test="more != null">
+            #{more,jdbcType=VARCHAR},
+        </if>
+    </trim>
+    </insert>
+    <select id="selectById" parameterType="java.lang.Integer" resultType="com.spx.entity.Dy">
+        select * from dy where id = #{id}
+    </select>
+    <update id="update" parameterType="com.spx.entity.Dy">
+        update dy
+        <set>
+                name = #{name,jdbcType=VARCHAR},
+                price = #{price,jdbcType=INTEGER},
+                edgl = #{edgl,jdbcType=VARCHAR},
+                pfclx = #{pfclx,jdbcType=VARCHAR},
+                dylx = #{dylx,jdbcType=VARCHAR},
+                fsms = #{fsms,jdbcType=VARCHAR},
+                qttd = #{qttd,jdbcType=VARCHAR},
+                fs = #{fs,jdbcType=INTEGER},
+                ms = #{ms,jdbcType=VARCHAR},
+                more = #{more,jdbcType=VARCHAR}
+        </set>
+        where id = #{id};
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from dy where id = #{id};
+    </delete>
+</mapper>

@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spx.dao.ZbDao">
+
+
+    <select id="findTotalLike" parameterType="com.spx.entity.Zb" resultType="java.lang.Integer">
+        select count(*) from zb where 1=1
+        <if test="zb != null">
+            <if test="zb.name != null and zb.name!=''">
+                and name like CONCAT('%', #{zb.name} ,'%')
+            </if>
+        </if>
+        <if test="zb != null">
+            <if test="zb.zxpz != null and zb.zxpz!=''">
+                and zxpz like CONCAT('%', #{zb.zxpz} ,'%')
+            </if>
+        </if>
+        <if test="zb != null">
+            <if test="zb.cc != null and zb.cc!=''">
+                and cc like CONCAT('%', #{zb.cc} ,'%')
+            </if>
+        </if>
+        <if test="zb != null">
+            <if test="zb.bx != null and zb.bx!=''">
+                and bx like CONCAT('%', #{zb.bx} ,'%')
+            </if>
+        </if>
+        <if test="zb != null">
+            <if test="zb.jcxp != null and zb.jcxp!=''">
+                and jcxp like CONCAT('%', #{zb.jcxp} ,'%')
+            </if>
+        </if>
+        <if test="zb != null">
+            <if test="zb.nclx != null and zb.nclx!=''">
+                and nclx like CONCAT('%', #{zb.nclx} ,'%')
+            </if>
+        </if>
+        ;
+    </select>
+    <select id="allzb" resultType="com.spx.entity.Zb">
+        select * from zb where 1=1
+        <if test="zb != null">
+            <if test="zb.name != null and zb.name!=''">
+                and name like CONCAT('%', #{zb.name} ,'%')
+            </if>
+        </if>
+        <if test="zb != null">
+            <if test="zb.zxpz != null and zb.zxpz!=''">
+                and zxpz like CONCAT('%', #{zb.zxpz} ,'%')
+            </if>
+        </if>
+        <if test="zb != null">
+            <if test="zb.cc != null and zb.cc!=''">
+                and cc like CONCAT('%', #{zb.cc} ,'%')
+            </if>
+        </if>
+        <if test="zb != null">
+            <if test="zb.bx != null and zb.bx!=''">
+                and bx like CONCAT('%', #{zb.bx} ,'%')
+            </if>
+        </if>
+        <if test="zb != null">
+            <if test="zb.jcxp != null and zb.jcxp!=''">
+                and jcxp like CONCAT('%', #{zb.jcxp} ,'%')
+            </if>
+        </if>
+        <if test="zb != null">
+            <if test="zb.nclx != null and zb.nclx!=''">
+                and nclx like CONCAT('%', #{zb.nclx} ,'%')
+            </if>
+        </if>
+        limit #{1},5;
+    </select>
+    
+    
+    <select id="selectList" resultType="com.spx.entity.Zb">
+        select * from zb limit #{page},#{rows};
+    </select>
+
+    <select id="findTotal" resultType="java.lang.Long">
+        select count(*) from zb;
+    </select>
+
+    <insert id="insert" parameterType="com.spx.entity.Zb">
+    insert into zb
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+       id,
+        <if test="name != null">
+            name,
+        </if>
+        <if test="price != null">
+            price,
+        </if>
+        <if test="zxpz != null">
+            zxpz,
+        </if>
+        <if test="cc != null">
+            cc,
+        </if>
+        <if test="bx != null">
+            bx,
+        </if>
+        <if test="jcxp != null">
+            jcxp,
+        </if>
+        <if test="nclx != null">
+            nclx,
+        </if>
+        <if test="fs != null">
+            fs,
+        </if>
+        <if test="ms != null">
+            ms,
+        </if>
+        <if test="more != null">
+            more,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+       null,
+        <if test="name != null">
+            #{name,jdbcType=VARCHAR},
+        </if>
+        <if test="price != null">
+            #{price,jdbcType=INTEGER},
+        </if>
+        <if test="zxpz != null">
+            #{zxpz,jdbcType=VARCHAR},
+        </if>
+        <if test="cc != null">
+            #{cc,jdbcType=VARCHAR},
+        </if>
+        <if test="bx != null">
+            #{bx,jdbcType=VARCHAR},
+        </if>
+        <if test="jcxp != null">
+            #{jcxp,jdbcType=VARCHAR},
+        </if>
+        <if test="nclx != null">
+            #{nclx,jdbcType=VARCHAR},
+        </if>
+        <if test="fs != null">
+            #{fs,jdbcType=INTEGER},
+        </if>
+        <if test="ms != null">
+            #{ms,jdbcType=VARCHAR},
+        </if>
+        <if test="more != null">
+            #{more,jdbcType=VARCHAR},
+        </if>
+    </trim>
+    </insert>
+    <select id="selectById" parameterType="java.lang.Integer" resultType="com.spx.entity.Zb">
+        select * from zb where id = #{id}
+    </select>
+    <update id="update" parameterType="com.spx.entity.Zb">
+        update zb
+        <set>
+                name = #{name,jdbcType=VARCHAR},
+                price = #{price,jdbcType=INTEGER},
+                zxpz = #{zxpz,jdbcType=VARCHAR},
+                cc = #{cc,jdbcType=VARCHAR},
+                bx = #{bx,jdbcType=VARCHAR},
+                jcxp = #{jcxp,jdbcType=VARCHAR},
+                nclx = #{nclx,jdbcType=VARCHAR},
+                fs = #{fs,jdbcType=INTEGER},
+                ms = #{ms,jdbcType=VARCHAR},
+                more = #{more,jdbcType=VARCHAR}
+        </set>
+        where id = #{id};
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from zb where id = #{id};
+    </delete>
+</mapper>

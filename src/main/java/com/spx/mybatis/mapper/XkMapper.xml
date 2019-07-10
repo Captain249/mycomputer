@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.spx.dao.XkDao">
+
+
+    <select id="findTotalLike" parameterType="com.spx.entity.Xk" resultType="java.lang.Integer">
+        select count(*) from xk where 1=1
+        <if test="xk != null">
+            <if test="xk.name != null and xk.name!=''">
+                and name like CONCAT('%', #{xk.name} ,'%')
+            </if>
+        </if>
+        <if test="xk != null">
+            <if test="xk.xpcs != null and xk.xpcs!=''">
+                and xpcs like CONCAT('%', #{xk.xpcs} ,'%')
+            </if>
+        </if>
+        <if test="xk != null">
+            <if test="xk.xkxp != null and xk.xkxp!=''">
+                and xkxp like CONCAT('%', #{xk.xkxp} ,'%')
+            </if>
+        </if>
+        <if test="xk != null">
+            <if test="xk.xcrl != null and xk.xcrl!=''">
+                and xcrl like CONCAT('%', #{xk.xcrl} ,'%')
+            </if>
+        </if>
+        <if test="xk != null">
+            <if test="xk.xcwk != null and xk.xcwk!=''">
+                and xcwk like CONCAT('%', #{xk.xcwk} ,'%')
+            </if>
+        </if>
+        <if test="xk != null">
+            <if test="xk.jk != null and xk.jk!=''">
+                and jk like CONCAT('%', #{xk.jk} ,'%')
+            </if>
+        </if>
+        ;
+    </select>
+    <select id="allxk" resultType="com.spx.entity.Xk">
+        select * from xk where 1=1
+        <if test="xk != null">
+            <if test="xk.name != null and xk.name!=''">
+                and name like CONCAT('%', #{xk.name} ,'%')
+            </if>
+        </if>
+        <if test="xk != null">
+            <if test="xk.xpcs != null and xk.xpcs!=''">
+                and xpcs like CONCAT('%', #{xk.xpcs} ,'%')
+            </if>
+        </if>
+        <if test="xk != null">
+            <if test="xk.xkxp != null and xk.xkxp!=''">
+                and xkxp like CONCAT('%', #{xk.xkxp} ,'%')
+            </if>
+        </if>
+        <if test="xk != null">
+            <if test="xk.xcrl != null and xk.xcrl!=''">
+                and xcrl like CONCAT('%', #{xk.xcrl} ,'%')
+            </if>
+        </if>
+        <if test="xk != null">
+            <if test="xk.xcwk != null and xk.xcwk!=''">
+                and xcwk like CONCAT('%', #{xk.xcwk} ,'%')
+            </if>
+        </if>
+        <if test="xk != null">
+            <if test="xk.jk != null and xk.jk!=''">
+                and jk like CONCAT('%', #{xk.jk} ,'%')
+            </if>
+        </if>
+        limit #{1},5;
+    </select>
+    
+    
+    
+    <select id="selectList" resultType="com.spx.entity.Xk">
+        select * from xk limit #{page},#{rows};
+    </select>
+
+    <select id="findTotal" resultType="java.lang.Long">
+        select count(*) from xk;
+    </select>
+
+    <insert id="insert" parameterType="com.spx.entity.Xk">
+    insert into xk
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+       id,
+        <if test="name != null">
+            name,
+        </if>
+        <if test="price != null">
+            price,
+        </if>
+        <if test="xpcs != null">
+            xpcs,
+        </if>
+        <if test="xkxp != null">
+            xkxp,
+        </if>
+        <if test="xcrl != null">
+            xcrl,
+        </if>
+        <if test="xcwk != null">
+            xcwk,
+        </if>
+        <if test="jk != null">
+            jk,
+        </if>
+        <if test="fs != null">
+            fs,
+        </if>
+        <if test="ms != null">
+            ms,
+        </if>
+        <if test="more != null">
+            more,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+       null,
+        <if test="name != null">
+            #{name,jdbcType=VARCHAR},
+        </if>
+        <if test="price != null">
+            #{price,jdbcType=INTEGER},
+        </if>
+        <if test="xpcs != null">
+            #{xpcs,jdbcType=VARCHAR},
+        </if>
+        <if test="xkxp != null">
+            #{xkxp,jdbcType=VARCHAR},
+        </if>
+        <if test="xcrl != null">
+            #{xcrl,jdbcType=VARCHAR},
+        </if>
+        <if test="xcwk != null">
+            #{xcwk,jdbcType=VARCHAR},
+        </if>
+        <if test="jk != null">
+            #{jk,jdbcType=VARCHAR},
+        </if>
+        <if test="fs != null">
+            #{fs,jdbcType=INTEGER},
+        </if>
+        <if test="ms != null">
+            #{ms,jdbcType=VARCHAR},
+        </if>
+        <if test="more != null">
+            #{more,jdbcType=VARCHAR},
+        </if>
+    </trim>
+    </insert>
+    <select id="selectById" parameterType="java.lang.Integer" resultType="com.spx.entity.Xk">
+        select * from xk where id = #{id}
+    </select>
+    <update id="update" parameterType="com.spx.entity.Xk">
+        update xk
+        <set>
+                name = #{name,jdbcType=VARCHAR},
+                price = #{price,jdbcType=INTEGER},
+                xpcs = #{xpcs,jdbcType=VARCHAR},
+                xkxp = #{xkxp,jdbcType=VARCHAR},
+                xcrl = #{xcrl,jdbcType=VARCHAR},
+                xcwk = #{xcwk,jdbcType=VARCHAR},
+                jk = #{jk,jdbcType=VARCHAR},
+                fs = #{fs,jdbcType=INTEGER},
+                ms = #{ms,jdbcType=VARCHAR},
+                more = #{more,jdbcType=VARCHAR}
+        </set>
+        where id = #{id};
+    </update>
+
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from xk where id = #{id};
+    </delete>
+</mapper>
